@@ -15,15 +15,16 @@ jobs:
         sudo apt install -y python3-pip zip unzip openjdk-17-jdk
         pip install buildozer cython
 
-    - - name: Setup Android SDK
+    - name: Setup Android SDK
   run: |
-    mkdir -p $HOME/android-sdk/cmdline-tools
-    cd $HOME/android-sdk/cmdline-tools
+    mkdir -p $HOME/android-sdk
+    cd $HOME/android-sdk
 
     wget https://dl.google.com/android/repository/commandlinetools-linux-9477386_latest.zip
     unzip commandlinetools-linux-*.zip
 
-    mv cmdline-tools latest
+    mkdir -p cmdline-tools/latest
+    mv cmdline-tools/* cmdline-tools/latest/ || true
 
     export ANDROID_HOME=$HOME/android-sdk
     export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$PATH
